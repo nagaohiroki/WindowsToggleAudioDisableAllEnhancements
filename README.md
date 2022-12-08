@@ -1,0 +1,2 @@
+# WindowsToggleAudioDisableAllEnhancements
+WindowsToggleAudioDisableAllEnhancements
