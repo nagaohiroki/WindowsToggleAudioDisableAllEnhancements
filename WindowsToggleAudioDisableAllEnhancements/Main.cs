@@ -18,6 +18,7 @@ class ToggleAudioDisableAllEnhancements
 	{
 		ToggleRegistry(FindRegistry(MediaDevice.GetDefaultAudioRenderId(AudioDeviceRole.Default)));
 		RestartService("Audiosrv");
+		Console.ReadKey();
 	}
 	void ToggleRegistry(string inRegistry)
 	{
@@ -27,11 +28,12 @@ class ToggleAudioDisableAllEnhancements
 			var reg = Registry.LocalMachine.OpenSubKey(regName, true);
 			var val = (Int32)reg.GetValue(disableAllEnhancements) == 0 ? 1 : 0;
 			reg.SetValue(disableAllEnhancements, val);
+			Console.WriteLine($"DisableAllEnhancements : {val}");
 		}
-		catch(UnauthorizedAccessException)
+		catch(Exception ex)
 		{
+			Console.WriteLine($"{ex}");
 			Console.WriteLine($"Please Access Permission Registry :\n{regName}");
-			Console.ReadKey();
 		}
 	}
 	string FindRegistry(string inName)
